@@ -86,3 +86,11 @@ create_user "perrier"
 create_user "cindy"
 create_user "tiger"
 create_user "yoda"
+
+# Adds dennis to sudo group
+if ! groups dennis | grep -q "sudo"; then
+    usermod -aG sudo dennis
+    print_message "Added dennis to sudo group"
+else
+    print_message "dennis is already in the sudo group"
+fi
