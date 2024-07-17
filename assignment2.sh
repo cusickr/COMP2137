@@ -59,6 +59,34 @@ configure_ufw() {
     fi
 }
 
+# Create users
+create_user() {
+    USER=$1
+    PUBLIC_KEY=$2
+
+    if ! id -u "$USER" &>/dev/null; then
+        print_message "Creating user $USER"
+        useradd -m -s /bin/bash "$USER"
+    else
+        print_message "User $USER already exists"
+    fi
+
+    if [[ -n "$PUBLIC_KEY" ]]; then
+        SSH_DIR="/home/$USER/.ssh"
+        AUTH_KEYS_FILE="$SSH_DIR/authorized_keys"
+
+        mkdir -p "$SSH_DIR"
+        chown "$USER":"$USER" "$SSH_DIR"
+        chmod 700 "$SSH_DIR"
+
+        if ! grep -q "$PUBLIC_KEY" "$AUTH_KEYS_FILE"; then
+            echo "$PUBLIC_KEY" >> "$AUTH_KEYS_FILE"
+            chown "$USER":"$USER" "$AUTH_KEYS_FILE"
+            chmod 600 "$AUTH_KEYS_FILE"
+        fi
+    fi
+}
+
 # Ensure script is run as root
 if [[ $EUID -ne 0 ]]; then
     print_message "This script must be run as root"
@@ -99,3 +127,5 @@ if ! groups dennis | grep -q "sudo"; then
 else
     print_message "dennis is already in the sudo group"
 fi
+
+print_message "Configuration complete"
