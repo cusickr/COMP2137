@@ -65,6 +65,11 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+# Install necessary packages
+check_and_install_package "apache2"
+check_and_install_package "squid"
+check_and_install_package "ufw"
+
 # Configure netplan
 configure_netplan
 
