@@ -45,3 +45,16 @@ configure_hosts() {
         print_message "/etc/hosts is already configured"
     fi
 }
+
+# Configuring UFW
+configure_ufw() {
+    if ! ufw status | grep -q "Status: active"; then
+        print_message "Configuring UFW"
+        ufw allow ssh
+        ufw allow http
+        ufw allow 3128  # Squid web proxy
+        ufw enable
+    else
+        print_message "UFW is already configured"
+    fi
+}
