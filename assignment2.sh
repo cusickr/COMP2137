@@ -64,3 +64,12 @@ if [[ $EUID -ne 0 ]]; then
     print_message "This script must be run as root"
     exit 1
 fi
+
+# Configure netplan
+configure_netplan
+
+# Configure /etc/hosts
+configure_hosts
+
+# Configure UFW
+configure_ufw
