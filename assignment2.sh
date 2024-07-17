@@ -73,3 +73,16 @@ configure_hosts
 
 # Configure UFW
 configure_ufw
+
+# Create users and set up SSH keys
+create_user "dennis" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rT3vTt99Ox5kndS4HmgTrKBT8SKzhK4rhGkEVGlCI richard@pc200560006"
+create_user "aubrey"
+create_user "captain"
+create_user "snibbles"
+create_user "brownie"
+create_user "scooter"
+create_user "sandy"
+create_user "perrier"
+create_user "cindy"
+create_user "tiger"
+create_user "yoda"
