@@ -32,3 +32,16 @@ configure_netplan() {
         print_message "Netplan is already configured"
     fi
 }
+
+# Configure hosts in /etc
+configure_hosts() {
+    HOST_ENTRY="192.168.16.21 server1"
+
+    if ! grep -q "$HOST_ENTRY" /etc/hosts; then
+        print_message "Updating /etc/hosts"
+        sed -i '/server1/d' /etc/hosts
+        echo "$HOST_ENTRY" >> /etc/hosts
+    else
+        print_message "/etc/hosts is already configured"
+    fi
+}
