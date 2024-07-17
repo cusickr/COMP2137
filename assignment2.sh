@@ -58,3 +58,9 @@ configure_ufw() {
         print_message "UFW is already configured"
     fi
 }
+
+# Ensure script is run as root
+if [[ $EUID -ne 0 ]]; then
+    print_message "This script must be run as root"
+    exit 1
+fi
