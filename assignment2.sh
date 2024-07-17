@@ -18,3 +18,17 @@ check_and_install_package() {
     fi
 }
 
+# Configuring netplan
+configure_netplan() {
+    NETPLAN_FILE="/etc/netplan/01-netcfg.yaml"
+    IP_ADDRESS="192.168.16.21/24"
+
+    if ! grep -q "$IP_ADDRESS" "$NETPLAN_FILE"; then
+        print_message "Configuring netplan"
+        # This is assuming the existing configuration needs to be appended
+        echo -e "network:\n  version: 2\n  ethernets:\n    eth0:\n      addresses:\n        - $IP_ADDRESS" > "$NETPLAN_FILE"
+        netplan apply
+    else
+        print_message "Netplan is already configured"
+    fi
+}
