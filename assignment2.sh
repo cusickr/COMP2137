@@ -108,9 +108,9 @@ configure_hosts
 configure_ufw
 
 # Git configuration
-git config pull.rebase false   # For merge
-git config pull.rebase true    # For rebase
-git config pull.ff only        # For fast-forward only
+git pull --rebase       # For rebase
+git pull --no-rebase    # For merge
+git pull --ff-only      # For fast-forward only
 
 # Create users and set up SSH keys
 create_user "dennis" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rT3vTt99Ox5kndS4HmgTrKBT8SKzhK4rhGkEVGlCI richard@pc200560006"
