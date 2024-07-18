@@ -1,6 +1,6 @@
 #!/bin/bash
-#Richard Cusick 200560006
-#Assignment2
+# Richard Cusick 200560006
+# Assignment2
 
 # Print messages
 print_message() {
@@ -106,6 +106,11 @@ configure_hosts
 
 # Configure UFW
 configure_ufw
+
+# Git configuration
+git config --global pull.rebase false
+git config --global pull.rebase true
+git config --global pull.ff only
 
 # Create users and set up SSH keys
 create_user "dennis" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rT3vTt99Ox5kndS4HmgTrKBT8SKzhK4rhGkEVGlCI richard@pc200560006"
