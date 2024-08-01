@@ -2,10 +2,23 @@
 # Richard Cusick 200560006
 # Assignment 3
 
+# Function to display usage information and exit
+display_help() {
+    echo "Usage: $0 [--verbose] --name <desiredName> --ip <desiredIPAddress> --hostentry <desiredName> <desiredIPAddress>"
+    exit 1
+}
+
+# Variables
+VERBOSE=false # Initializes the verbose flag to false
+# Initializes variables to store command-line arguments
+HOSTNAME=""
+IPADDRESS=""
+HOSTENTRY_NAME=""
+HOSTENTRY_IP=""
 
 # Parsing command-line arguments
-while [[ "$#" -gt 0 ]]; do
-    	case $1 in
+while [[ "$#" -gt 0 ]]; do # Loops to parse command-line arguments
+    	case $1 in # Switch-case to handle different command-line arguments
         	--verbose) # Enables verbose output
             		VERBOSE=true
             		shift
