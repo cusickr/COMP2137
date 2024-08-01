@@ -42,6 +42,13 @@ while [[ "$#" -gt 0 ]]; do # Loops to parse command-line arguments
 	esac
 done
 
+# Function to log messages if verbose is enabled
+log_message() {
+    	if $VERBOSE; then
+        	echo "$1"
+    	fi
+}
+
 # Updating hostname
 update_hostname() {
 	local current_hostname=$(hostname) # Gets the current hostname
@@ -80,3 +87,6 @@ update_hosts_entry() {
         	log_message "$HOSTENTRY_NAME with IP $HOSTENTRY_IP already exists in /etc/hosts"
     	fi
 }
+
+# Ignore signals
+trap '' TERM HUP INT
