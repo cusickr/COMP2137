@@ -90,3 +90,8 @@ update_hosts_entry() {
 
 # Ignore signals
 trap '' TERM HUP INT
+
+# Execute the updates
+[ -n "$HOSTNAME" ] && update_hostname # Executes the update_hostname function if the hostname is provided
+[ -n "$IPADDRESS" ] && update_ip # Executes the update_ip function if the IP address is provided
+[ -n "$HOSTENTRY_NAME" ] && [ -n "$HOSTENTRY_IP" ] && update_hosts_entry # Executes the update_hosts_entry function if the host entry is provided
