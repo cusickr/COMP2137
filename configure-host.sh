@@ -30,3 +30,14 @@ update_ip() {
 		log_message "IP address is already set to $IPADDRESS"
 	fi
 }
+
+# Updating /etc/hosts entry
+update_hosts_entry() {
+    if ! grep -q "$HOSTENTRY_NAME" /etc/hosts; then # Checks to see if the desired host is present in /etc/hosts
+        log_message "Adding $HOSTENTRY_NAME with IP $HOSTENTRY_IP to /etc/hosts"
+        echo "$HOSTENTRY_IP $HOSTENTRY_NAME" >> /etc/hosts # Adds host entry to /etc/hosts
+        logger "Added $HOSTENTRY_NAME with IP $HOSTENTRY_IP to /etc/hosts" # Logs the change using the logger program
+    else
+        log_message "$HOSTENTRY_NAME with IP $HOSTENTRY_IP already exists in /etc/hosts"
+    fi
+}
